@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import BasicTable from './components/BasicTable';
 import Search from './components/Search';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 function App() {
   const [data, setData] = useState([])
   const [params, setParams] = useState({
@@ -25,8 +27,8 @@ function App() {
 
   return (
     <>
-      <Search getData={getData} data={data} setParams={setParams} params={params} />
       <BasicTable data={data}/>
+      <Search getData={getData} data={data} setParams={setParams} params={params} />
     </>
   );
 }
