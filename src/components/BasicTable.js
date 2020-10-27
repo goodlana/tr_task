@@ -16,7 +16,8 @@ const BasicTable = ({data}) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow,} = tableInstance
 
   return (
-    <table {...getTableProps()}>
+    <div className="table-wrapper">
+          <table {...getTableProps()}>
       <thead>
         {
           headerGroups.map(headerGroup => (
@@ -47,6 +48,7 @@ const BasicTable = ({data}) => {
         }
       </tbody>
     </table>
+    </div>
   )
 }
 

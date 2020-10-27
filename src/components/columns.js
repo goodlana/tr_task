@@ -6,6 +6,7 @@ export const COLUMNS = [
   {
     Header: '제목',
     accessor: 'title',
+    Cell: ({value}) => {return <span>{value}</span>}
   },
   {
     Header: '별점',

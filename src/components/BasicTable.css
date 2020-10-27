@@ -1,17 +1,31 @@
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 80%;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
 }
 
 thead {
-  background-color: antiquewhite;
+  background-color: #61bdff;
+  color: #ffffff;
 }
 
 td, th {
-  border: 1px solid #dddddd;
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
   text-align: center;
   padding: 8px;
+}
+
+tbody tr:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+span {
+  display: block;
+  text-align: left;
 }
 
 /* tr:nth-child(even) {
