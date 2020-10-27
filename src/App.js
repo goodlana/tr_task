@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios'
+import { useState, useEffect } from 'react';
+import List from './components/List';
 
 function App() {
+  const [data, setData] = useState([])
+  const [params, setParams] = useState({
+    search:'',
+    ordering: '',
+    page_size: null,
+    page: null
+  })
+  
+  const getData = (params) => {
+    const url = 'http://tourlive-code-test-1586978259.ap-northeast-2.elb.amazonaws.com/v1/tours'
+    axios.get(url, {params: params})
+    .then(json => {setData(json.data.data.results)})
+    .catch(error => error)
+  }
+
+  useEffect(() => {
+    getData(params)
+  },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <List data={data} />
   );
 }
 
