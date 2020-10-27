@@ -7,17 +7,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [data, setData] = useState([])
+  const [count, setCount] = useState(0)
   const [params, setParams] = useState({
     search:'',
     ordering: '',
-    page_size: null,
-    page: null
+    page_size: 20,
+    page: 1
   })
 
   const getData = (params) => {
     const url = 'http://tourlive-code-test-1586978259.ap-northeast-2.elb.amazonaws.com/v1/tours'
     axios.get(url, {params: params})
-    .then(json => {setData(json.data.data.results)})
+    .then(json => {
+      setData(json.data.data.results)
+      setCount(json.data.data.count)
+    })
     .catch(error => error)
   }
 
@@ -28,7 +32,7 @@ function App() {
   return (
     <>
       <BasicTable data={data}/>
-      <Search getData={getData} data={data} setParams={setParams} params={params} />
+      <Search setCount={setCount} count={count} setParams={setParams} params={params} />
     </>
   );
 }

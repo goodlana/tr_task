@@ -9,7 +9,7 @@ export const COLUMNS = [
     Cell: ({value}) => {return <span>{value}</span>}
   },
   {
-    Header: '별점',
+    Header: '평점',
     accessor:'rate'
   },
   {

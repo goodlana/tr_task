@@ -44,28 +44,39 @@ const SearchStyle = styled.div`
   .search-toggle {
     margin-right: 10px;
   }
+
+  .pages {
+    display:flex;
+    justify-content:center;
+    align-items: center;
+  }
+
+  .page {
+    display: block;
+    margin: 0px 5px;
+    cursor: pointer
+  }
 `;
 
 const initialParams = {
-  search: "",
-  ordering: "",
-  page_size: null,
-  page: null,
-};
-
-const Search = ({ setParams, params }) => {
+  search:'',
+  ordering: '',
+  page_size: 20,
+  page: null
+}
+const Search = ({ count, setParams, params }) => {
   const [value, setValue] = useState("");
   const onChange = (e) => {
     setValue(e.target.value);
   };
 
   const searchData = () => {
-    setParams({ ...params, search: value });
+    setParams({ initialParams, search: value });
     setValue("");
   };
 
   const olderData = () => {
-    setParams({ ...params, ordering: "id" });
+    setParams({ initialParams, ordering: "id" });
   };
 
   const newerData = () => {
@@ -76,6 +87,14 @@ const Search = ({ setParams, params }) => {
     setParams({ ...params, page_size: num });
   };
 
+  const pages = () => {
+    let result = [1]
+    let max = Math.ceil(count/params.page_size)
+    for(let i=2; i<=max; i++ ) {
+      result = result.concat(i)
+    }
+    return result
+  }
   return (
     <SearchStyle>
       <div className="search-wrapper">
@@ -86,7 +105,7 @@ const Search = ({ setParams, params }) => {
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item onClick={olderData}>오래된순</Dropdown.Item>
-              <Dropdown.Item onClick={newerData}>최근순</Dropdown.Item>
+              <Dropdown.Item onClick={newerData}>최신순</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
 
@@ -101,6 +120,12 @@ const Search = ({ setParams, params }) => {
               <Dropdown.Item onClick={() => pagesize(5)}>5개</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
+        </div>
+        <div className="pages">
+          {pages().map((page,index) => 
+            (<p key={index}
+                className="page" 
+                onClick={()=> setParams({...params, page: page})}>{page}</p>))}
         </div>
         <div>
           <input name="name" value={value} onChange={onChange} />
