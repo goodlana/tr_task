@@ -1,9 +1,11 @@
 import React, {useMemo} from 'react'
 import { useTable } from 'react-table'
 import { COLUMNS } from './columns'
+import Detail from '../pages/Detail'
 import './BasicTable.css'
+import { Link } from 'react-router-dom'
 
-const BasicTable = ({data}) => {
+const BasicTable = ({data, setId}) => {
 
   const columns = useMemo(() => COLUMNS, [])
   // const newdata = useMemo(() => data, [])
@@ -36,10 +38,12 @@ const BasicTable = ({data}) => {
           rows.map(row => {
             prepareRow(row)
             return (
-              <tr {...row.getRowProps()}>
+              <tr {...row.getRowProps()} onClick={() => {setId(row.original.id)}}>
                 {
                   row.cells.map((cell) => {
-                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                    return  <td {...cell.getCellProps()} >
+                    {cell.render('Cell')}
+                    </td>
                   })
                 }
               </tr>
@@ -53,3 +57,6 @@ const BasicTable = ({data}) => {
 }
 
 export default BasicTable
+
+
+//<Link to={`${row.original.id}`} component={Detail}/>

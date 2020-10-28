@@ -21,6 +21,7 @@ td, th {
 
 
 tbody tr:hover {
+  background-color: #d4e5ff;
   font-weight: 600;
   cursor: pointer;
 }

@@ -2,12 +2,15 @@ import axios from 'axios'
 import { useState, useEffect } from 'react';
 import BasicTable from './components/BasicTable';
 import Search from './components/Search';
+import {Route} from 'react-router-dom'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Detail from './pages/Detail';
 
 function App() {
   const [data, setData] = useState([])
   const [count, setCount] = useState(0)
+  const [id, setId] = useState('')
   const [params, setParams] = useState({
     search:'',
     ordering: '',
@@ -31,8 +34,13 @@ function App() {
 
   return (
     <>
-      <BasicTable data={data}/>
+    <Route exact path="/">
+      <BasicTable data={data} setId={setId}/>
       <Search setCount={setCount} count={count} setParams={setParams} params={params} />
+    </Route>
+    <Route path="/detail">
+      <Detail id={id}/>
+    </Route>
     </>
   );
 }

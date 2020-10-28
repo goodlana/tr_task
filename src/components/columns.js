@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export const COLUMNS = [
   {
     Header: '번호',
@@ -6,7 +8,11 @@ export const COLUMNS = [
   {
     Header: '제목',
     accessor: 'title',
-    Cell: ({value}) => {return <span>{value}</span>}
+    Cell: ({value}) => {
+      return <Link to="detail" style={{ textDecoration: 'none', color: '#000000' }}>
+      <span>{value}</span>
+      </Link>
+    }
   },
   {
     Header: '평점',

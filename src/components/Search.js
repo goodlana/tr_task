@@ -62,7 +62,7 @@ const initialParams = {
   search:'',
   ordering: '',
   page_size: 20,
-  page: null
+  page: 1
 }
 const Search = ({ count, setParams, params }) => {
   const [value, setValue] = useState("");
@@ -71,12 +71,12 @@ const Search = ({ count, setParams, params }) => {
   };
 
   const searchData = () => {
-    setParams({ initialParams, search: value });
+    setParams({ ...params, search: value });
     setValue("");
   };
 
   const olderData = () => {
-    setParams({ initialParams, ordering: "id" });
+    setParams({ ...params, ordering: "id" });
   };
 
   const newerData = () => {
@@ -88,7 +88,7 @@ const Search = ({ count, setParams, params }) => {
   };
 
   const pages = () => {
-    let result = [1]
+    let result = [1] //default
     let max = Math.ceil(count/params.page_size)
     for(let i=2; i<=max; i++ ) {
       result = result.concat(i)
@@ -125,7 +125,10 @@ const Search = ({ count, setParams, params }) => {
           {pages().map((page,index) => 
             (<p key={index}
                 className="page" 
-                onClick={()=> setParams({...params, page: page})}>{page}</p>))}
+                onClick={()=> setParams({...params, page: page})}
+                >
+                  {page}
+                </p>))}
         </div>
         <div>
           <input name="name" value={value} onChange={onChange} />
