@@ -1,9 +1,41 @@
 import React, {useMemo} from 'react'
 import { useTable } from 'react-table'
 import { COLUMNS } from './columns'
-import Detail from '../pages/Detail'
-import './BasicTable.css'
-import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+
+const TableStyle = styled.div`
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 1200px;
+  margin: 30px auto 5px auto;
+}
+
+thead {
+  background-color: #297bff;
+  color: #ffffff;
+  text-align: center;
+}
+
+td, th {
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+
+tbody tr:hover {
+  background-color: #d4e5ff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+span {
+  display: block;
+  text-align: left;
+}`
 
 const BasicTable = ({data, setId}) => {
 
@@ -18,7 +50,8 @@ const BasicTable = ({data, setId}) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow,} = tableInstance
 
   return (
-    <div className="table-wrapper">
+    <TableStyle>
+          <div className="table-wrapper">
           <table {...getTableProps()}>
       <thead>
         {
@@ -53,6 +86,7 @@ const BasicTable = ({data, setId}) => {
       </tbody>
     </table>
     </div>
+    </TableStyle>
   )
 }
 

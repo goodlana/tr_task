@@ -15,7 +15,7 @@ export const COLUMNS = [
     }
   },
   {
-    Header: '평점',
+    Header: '별점',
     accessor:'rate'
   },
   {
